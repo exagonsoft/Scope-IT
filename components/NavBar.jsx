@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const NavBar = () => {
-  const isUserLoggedIn = true
+  const {data: session} = useSession();
   const [providers, setProviders] = useState(null)
   const [toggleMenu, setToggleMenu] = useState(false)
 
@@ -26,11 +26,11 @@ const NavBar = () => {
       </Link>
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? <div className="flex gap-3 md:gap-5">
+        {session?.user ? <div className="flex gap-3 md:gap-5">
           <Link href="/new_estimation" className="black_btn">New Estimation</Link>
           <button type="button" className="outline_btn" onClick={signOut}>Sign Out</button>
           <Link href="/profile" >
-            <img src="/assets/images/profile.svg" alt="profile" width={37} height={37} className="rounded-full" />
+            <img src={session?.user.image} alt="profile" width={37} height={37} className="rounded-full" />
           </Link>
         </div> : <>
           {
@@ -42,8 +42,8 @@ const NavBar = () => {
 
       {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? <div className="flex cursor-pointer">
-          <img src="/assets/images/profile.svg" alt="profile" width={37} height={37} className="rounded-full" onClick={() => setToggleMenu((prev) => !prev)} />
+        {session?.user ? <div className="flex cursor-pointer">
+          <img src={session?.user.image} alt="profile" width={37} height={37} className="rounded-full" onClick={() => setToggleMenu((prev) => !prev)} />
           {toggleMenu && (
             <div className="dropdown">
               <Link href="/profile" className="dropdown_link" onClick={() => setToggleMenu(false)}>My Profile</Link>
@@ -54,7 +54,7 @@ const NavBar = () => {
         </div> : <>
           {
             providers && Object.values(providers).map((_provider) => (
-              <button type="button" key={_provider.name} onClick={() => { signIn(_provider.id) }} className="black_btn">Sign In</button>
+              <button type="button" key={_provider.name} onClick={() => { signIn(_provider.id, {modal: true}) }} className="black_btn">Sign In</button>
             ))
           }</>}
       </div>
