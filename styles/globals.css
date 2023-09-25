@@ -8,6 +8,31 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+body {
+  --primary-hue: 210;
+  --gray-hue: 240;
+  --color-primary: hsl(var(--primary-hue), 100%, 50%);
+  --color-primary-variant: hsl(var(--primary-hue), 100%, 65%);
+  --color-secundary: #ffb116;
+  --color-gray-100: hsl(var(--gray-hue), 47%, 94%);
+  --color-gray-200: hsl(var(--gray-hue), 26%, 75%);
+  --color-gray-300: hsl(var(--gray-hue), 24%, 64%);
+  --color-gray-400: hsl(var(--gray-hue), 16%, 41%);
+  --color-gray-500: hsl(var(--gray-hue), 44%, 25%);
+  --color-gray-600: hsl(var(--gray-hue), 48%, 15%);
+
+  --container-width-lg: 80%;
+  --container-width-md: 90%;
+
+  --transitions: all 500ms ease;
+  --shadows: 2px 5px 8px rgba(20, 20, 20, 0.75);
+  --glow: 0 0 14px 2px rgb(237 230 52 / 71%);
+
+  --fadeInTop1: fadeInTop 1s ease;
+  --fadeOutTop1: fadeInTop 1s ease reverse;
+  --fade-height-max: 200px;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -141,40 +166,38 @@
 }
 
 .side-nav > li.active::before{
-  background: orange;
-  box-shadow: 0 0 5px orange,
-  0 0 10px orange,
-  0 0 20px orange,
-  0 0 30px orange,
-  0 0 40px orange,
-  0 0 50px orange;
+  background: rgb(76, 214, 238);
+  box-shadow: 0 0 5px rgb(61, 116, 126),
+  0 0 10px rgb(61, 116, 126),
+  0 0 20px rgb(61, 116, 126),
+  0 0 30px rgb(61, 116, 126),
+  0 0 40px rgb(61, 116, 126),
+  0 0 50px rgb(61, 116, 126);
 }
 
 .side-nav > li:hover .side-link-item > .icon {
-  color: rgb(240, 184, 79);
+  color: rgb(76, 214, 238);
 }
 
 .side-nav > li:hover .side-link-item > .side-nav-text{
-  display: flex;
-  width: max-content;
-  position: absolute;
-  left: 80px;
-  font-size: 1.25em;
-  background: orange;
-  color: #2f363e;
-  padding: 4px 15px;
-  border-radius: 15px;
-  box-shadow: 1px 1px 1.3px rgba(0,0,0,.25),
-  inset -.3px -.3px -.6px rgba(0,0,0,.5);
+  visibility: visible;
+  opacity: 1;
+}
+
+.side-nav > li.active:hover .side-link-item > .side-nav-text{
+  left: 140px;
+  visibility: visible;
+  opacity: 1;
 }
 
 .side-nav > li.active .side-link-item > .icon {
   transform: translateX(45px);
-  background: rgb(240, 184, 79);
-  color: #fff;
-  box-shadow: 1px 1px 1.3px rgba(0,0,0,.25),
-  inset .2px .2px .4px rgba(255,255,255,.25),
-  inset -.3px -.3px -.6px rgba(0,0,0,.5);
+  background: rgb(76, 214, 238);
+  color: #ffffff;
+  box-shadow:
+  5px 5px 7px rgba(0,0,0,0.25),
+  inset 2px 2px 3px rgba(255,255,255,.25),
+  inset -3px -3px 5px rgba(0,0,0,.5);
   transition-delay: 0s;
 }
 
@@ -206,22 +229,49 @@
   transition-delay: .2s;
 }
 
+.side-link-item > .icon > svg {
+  z-index: 10;
+}
+
 .side-link-item > .icon::before {
-  content: '';
+  content: ' ';
   position: absolute;
   inset: 10px;
-  background: linear-gradient(45deg,rgba(53, 34, 53, 0.3), rgba(26, 16, 26, 0.3), rgba(15, 10, 15, 0.3));
+  background: #2f363e;
   border-radius: 50%;
-  box-shadow: 1px 1px 1px rgba(0,0,0,.5),
-  inset .2px .2px .4px rgba(255,255,255,.25),
-  inset -.3px -.3px -.6px rgba(0,0,0,.5);
+  box-shadow: 
+  5px 5px 5px rgba(0,0,0,.5), /* Outer shadow */
+  inset 2px 2px 3px rgba(255,255,255,.25), /* Inner shadow */
+  inset -3px -3px 5px rgba(0,0,0,.5); /* Inner shadow */
   transform: scale(0);
   transition: .5s;
 }
 
 .side-link-item > .side-nav-text{
-  display: none;
+  width: max-content;
+  position: absolute;
+  left: 80px;
+  font-size: 1.25em;
+  background: rgb(76, 214, 238);
+  color: #2c2d2e;
+  padding: 4px 15px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 5px rgba(0,0,0,.25),
+  inset -2px -2px 4px rgba(0,0,0,.5);
+  visibility: hidden;
+  opacity: 0;
   transition: .5s;
+}
+
+.side-link-item > .side-nav-text::before{
+content: '';
+position: absolute;
+top: 50%;
+left: -4px;
+transform: translateY(-50%) rotate(45deg);
+width: 10px;
+height: 10px;
+background: rgb(76, 214, 238);
 }
 
 /* Tailwind Styles */
