@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const NavBar = () => {
-  const {data: session} = useSession();
+  const { data: session } = useSession();
   const [providers, setProviders] = useState(null)
   const [toggleMenu, setToggleMenu] = useState(false)
 
@@ -19,15 +19,14 @@ const NavBar = () => {
     SetProviders();
   }, [])
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
-      <Link href="/" className="flex gap-2 flex-center">
+    <nav className={`flex items-center flex-between w-full pt-2  ${session?.user ? 'pl-4' : 'pl-8'}  pr-8 m-2 mt-0 top-0 bg-transparent fixed z-10`}>
+      <Link href={session?.user ? '/dashboard' : '/'} className="flex gap-2 flex-center flex-col">
         <Image src="/assets/logo.svg" alt="Scope-IT Logo" width={50} height={50} className="object-contain" />
         <p className="logo_text">Scope-IT</p>
       </Link>
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {session?.user ? <div className="flex gap-3 md:gap-5">
-          <Link href="/new_estimation" className="black_btn">New Estimation</Link>
           <button type="button" className="outline_btn" onClick={signOut}>Sign Out</button>
           <Link href="/profile" >
             <img src={session?.user.image} alt="profile" width={37} height={37} className="rounded-full" />
@@ -54,7 +53,7 @@ const NavBar = () => {
         </div> : <>
           {
             providers && Object.values(providers).map((_provider) => (
-              <button type="button" key={_provider.name} onClick={() => { signIn(_provider.id, {modal: true}) }} className="black_btn">Sign In</button>
+              <button type="button" key={_provider.name} onClick={() => { signIn(_provider.id, { modal: true }) }} className="black_btn">Sign In</button>
             ))
           }</>}
       </div>

@@ -2,6 +2,9 @@ import '@styles/globals.css'
 import Logo from '@public/assets/logo.svg'
 import NavBar from '@components/NavBar'
 import Provider from '@components/Provider'
+import SideBar from '@components/SideBar'
+import { SessionProvider, getSession } from 'next-auth/react'
+import MainContainner from '@containers/maincontainner'
 
 export const metadata = {
     title: "Scope IT",
@@ -12,14 +15,17 @@ export const metadata = {
 const layout = ({ children }) => {
     return (
         <html lang='en'>
-            <body>
+            <body className=' overflow-hidden'>
                 <Provider>
                     <div className="main">
                         <div className="gradient" />
                     </div>
-                    <main className="app">
+                    <main className="app !p-0">
                         <NavBar />
-                        {children}
+                        <div className="blur-top"></div>
+                        <div className="flex justify-center w-full h-[100vh]">
+                            <MainContainner children={children}/>
+                        </div>
                     </main>
                 </Provider>
             </body>
