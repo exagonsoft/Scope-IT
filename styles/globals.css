@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
+/*'
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
@@ -20,6 +20,8 @@ body {
   --color-gray-400: hsl(var(--gray-hue), 16%, 41%);
   --color-gray-500: hsl(var(--gray-hue), 44%, 25%);
   --color-gray-600: hsl(var(--gray-hue), 48%, 15%);
+  --color-gradient-primary: linear-gradient(45deg, rgb(177, 203, 238), rgb(64, 165, 233), rgb(27, 220, 238));
+  --color-gradient-danger: linear-gradient(45deg, rgb(236, 115, 115), rgb(197, 41, 41), rgb(245, 7, 7));
 
   --container-width-lg: 80%;
   --container-width-md: 90%;
@@ -31,6 +33,9 @@ body {
   --fadeInTop1: fadeInTop 1s ease;
   --fadeOutTop1: fadeInTop 1s ease reverse;
   --fade-height-max: 200px;
+
+  --tw-shadow: 0 10px 15px -3px rgba(85, 81, 81, 0.1), 0 4px 6px -4px rgba(63, 60, 60, 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
 }
 
 .main {
@@ -65,6 +70,10 @@ body {
   filter: invert(1);
 }
 
+.gray-container{
+  
+}
+
 .gradient {
   height: fit-content;
   z-index: 3;
@@ -75,12 +84,12 @@ body {
       hsla(215, 98%, 61%, 1) 0px,
       transparent 0%
     ),
-    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 21%, rgb(57, 183, 192) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, rgb(58, 181, 253) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, rgb(13, 101, 184) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, rgb(120, 238, 218) 0px, transparent 50%),
     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+    radial-gradient(at 79% 53%, rgb(67, 135, 138) 0px, transparent 50%);
   position: absolute;
   content: "";
   width: 100%;
@@ -97,12 +106,43 @@ body {
 }
 
 .content-renderer{
-  padding-top: 6rem !important;
+  padding-top: 8rem !important;
+  padding-bottom: 4rem !important;
 }
 
 .nav-background{
-  background: linear-gradient(45deg,rgba(53, 34, 53, 0.3), rgba(26, 16, 26, 0.3), rgba(15, 10, 15, 0.3));
+  background: linear-gradient(45deg,rgba(223, 224, 230, 0.986), rgb(224, 225, 238), rgb(208, 232, 236));
   filter: blur(.3px);
+  border-left: 2px solid black;
+}
+
+.nav-bar{
+  background: linear-gradient(45deg,rgba(223, 224, 230, 0.986), rgb(224, 225, 238), rgb(208, 232, 236));
+  filter: blur(0.3px);
+  box-shadow: 5px 5px 15px rgba(0,0,0,.25), 2px 2px 14px rgba(0,0,0,.25), inset 1px 1px 2px rgba(0,0,0,.5), inset 1px 1px 4px rgba(255, 255, 255, .2), inset -1px -1px 3px rgba(0,0,0,.75);
+  transition: all ease-in-out .5s;
+  position: absolute;
+  right: 1.5rem;
+  padding: .3rem 2rem;
+  border-radius: 0 0 10px 10px;
+  border-top: 2px solid black;
+  z-index: 100;
+}
+
+.nav-bar-mobile{
+  background: linear-gradient(45deg,rgba(223, 224, 230, 0.986), rgb(224, 225, 238), rgb(208, 232, 236));
+  filter: blur(0.3px);
+  box-shadow: 5px 5px 15px rgba(0,0,0,.25), 2px 2px 14px rgba(0,0,0,.25), inset 1px 1px 2px rgba(0,0,0,.5), inset 1px 1px 4px rgba(255, 255, 255, .2), inset -1px -1px 3px rgba(0,0,0,.75);
+  transition: all ease-in-out .5s;
+  animation: fade-in linear .5s;
+  width: 100%;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
 
 .blur-top{
@@ -117,6 +157,17 @@ body {
 
 .containner{
  overflow-y: auto;
+ overflow-x: hidden;
+ padding: 0 3.5rem;
+ margin-left: 5%;
+ width: 95%;
+}
+
+@media screen and (max-width: 640px) {
+  .containner{
+    margin-left: 0;
+    padding: 0 1rem;
+  }
 }
 
 /* Hide the scrollbar for all div elements */
@@ -138,6 +189,8 @@ body {
   inset 1px 1px 2px rgba(0,0,0,.5),
   inset 1px 1px 4px rgba(255, 255, 255, .2),
   inset -1px -1px 3px rgba(0,0,0,.75);
+  width: 5%;
+  min-width: 100px;
 }
 
 .side-nav{
@@ -219,7 +272,6 @@ body {
   font-size: 1.75em;
   width: 80px;
   height: 80px;
-  color: #aaa;
   border-radius: 50%;
   display: flex;
   border-radius: 50%;
@@ -239,7 +291,7 @@ body {
   inset: 10px;
   background: #2f363e;
   border-radius: 50%;
-  box-shadow: 
+  box-shadow:
   5px 5px 5px rgba(0,0,0,.5), /* Outer shadow */
   inset 2px 2px 3px rgba(255,255,255,.25), /* Inner shadow */
   inset -3px -3px 5px rgba(0,0,0,.5); /* Inner shadow */
@@ -274,17 +326,192 @@ height: 10px;
 background: rgb(76, 214, 238);
 }
 
+.auth-image {
+  left: calc(50% - 30px);
+  margin-top: -50px;
+}
+
+.auth-separator::after {
+  content: '';
+  margin-left: 5px;
+}
+
+.separator > hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid white;
+  display: block;
+  margin: 2rem auto 1rem;
+  overflow: visible;
+}
+
+.separator > hr::before {
+  content: "or";
+  padding: 0 0.4rem;
+  position: relative;
+  top: -0.9em;
+}
+
+.spinner-wrapper {
+   justify-content: center;
+   align-items: center;
+}
+
+.loader-gradient{
+  width: 100%;
+  backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Add a semi-transparent background color */
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+
+.spinner {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border: 6px solid transparent;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite, changeColor 5s linear infinite; /* Add color change animation */
+}
+
+@keyframes fade-in{
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes changeColor {
+    0% {
+      border-top-color: #3498db;
+    }
+    25% {
+      border-top-color: #e74c3c;
+    }
+    50% {
+      border-top-color: #2ecc71;
+    }
+    75% {
+      border-top-color: #f39c12;
+    }
+    100% {
+      border-top-color: #3498db;
+    }
+  }
+
+  .object-hover-effect{
+    transition: all ease-in-out .3s;
+  }
+
+  .object-hover-effect:hover{
+    transform: scale(1.1);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+
+  .normal_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: var(--color-gradient-primary);
+    padding: .5rem 0;
+    font-weight: bold;
+    color: white;
+    transition: all ease-in-out .5s;
+  }
+
+  .normal_btn:hover{
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
+  }
+
+  @media (prefers-color-scheme: dark){
+    .object-hover-effect:hover{
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
+    }
+
+    .black_btn:hover {
+      background: var(--color-gradient-danger);
+      color: black;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
+    }
+    
+    .outline_btn:hover {
+      background: var(--color-gradient-danger);
+      color: black ;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
+    }
+  }
+
 /* Tailwind Styles */
+
+.general-container {
+  @apply flex flex-col gap-8 p-8 bg-black/50 rounded-lg shadow-xl
+}
+
+input {
+  @apply sm:min-w-[400px] min-w-[150px] w-full border border-gray-200 py-2 px-6 bg-zinc-900/40  text-white dark:bg-zinc-100/40 dark:text-zinc-900 rounded-md;
+}
+
+button {
+  @apply w-full border border-gray-200 py-2 px-6 bg-zinc-900/40  text-white dark:bg-zinc-100/40 dark:text-zinc-900 rounded-md;
+}
+
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col w-full sm:px-6 px-16 mx-0;
+  @apply relative z-10 flex justify-start items-center flex-col w-full h-screen sm:px-6 px-16 mx-0;
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  transition: all ease-in-out .5s;
+  border: none;
+  background: var(--color-gradient-primary);
+  color: black;
+  @apply rounded-full py-1.5 px-5 text-center text-sm font-inter flex items-center justify-center;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+  transition: all ease-in-out .5s;
+  border: none;
+  background: var(--color-gradient-primary);
+  color: black;
+  @apply rounded-full py-1.5 px-5 text-center text-sm font-inter flex items-center justify-center;
+}
+
+.black_btn:hover {
+  background: var(--color-gradient-danger);
+  color:white;
+  transform: scale(1.1);
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.outline_btn:hover {
+  background: var(--color-gradient-danger);
+  color:white;
+  transform: scale(1.1);
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .head_text {
@@ -343,6 +570,7 @@ background: rgb(76, 214, 238);
 }
 
 .dropdown {
+  animation: fade-in linear .3s;
   @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
 

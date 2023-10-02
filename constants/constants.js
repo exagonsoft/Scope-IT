@@ -1,14 +1,30 @@
-import { FaPhabricator, FaCalculator } from "react-icons/fa";
+import { FaCalculator} from "react-icons/fa";
+import {AiOutlineProject, AiOutlineCode, AiOutlineBarChart, AiOutlineSetting } from "react-icons/ai";
 
 export const sideBarLinks = [
     {
-        title: 'New estimation',
+        title: 'Projects',
+        icon : <AiOutlineProject />,
+        link: '/site/projects'
+    },
+    {
+        title: 'Estimation',
         icon : <FaCalculator />,
-        link: '/estimations'
+        link: '/site/estimations'
     },
     {
         title: 'Features',
-        icon : <FaPhabricator />,
-        link: '/features'
+        icon : <AiOutlineCode />,
+        link: '/site/features'
+    },
+    {
+        title: 'Statistics',
+        icon : <AiOutlineBarChart />,
+        link: '/site/statistics'
+    },
+    {
+        title: 'Settings',
+        icon : <AiOutlineSetting />,
+        link: '/site/settings'
     }
 ]

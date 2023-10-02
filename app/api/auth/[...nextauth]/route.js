@@ -1,58 +1,49 @@
-import NextAuth from "next-auth/next";
-import GoogleProvider from "next-auth/providers/google"
-import { connectToDB } from "@utils/database";
 import User from "@models/user";
+import { connectToDB } from "@utils/database";
+import NextAuth from "next-auth/next";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcrypt";
 
+export const authOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {},
+      async authorize(credentials) {
+        const { email, password } = credentials;
 
-const handler = NextAuth({
-    providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        })
-    ],
-    callbacks: {
-        async session({ session }) {
-            try {
-                const sessionUser = await User.findOne({
-                    email: session.user.email
-                })
+        try {
+          await connectToDB();
+          let user = await User.findOne({ email });
 
-                session.user.id = sessionUser._id.toString();
+          if (!user) {
+            return null;
+          }
 
-                return session;
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        async signIn({ profile }) {
-            try {
-                await connectToDB();
+          let _passwordsMatch = await bcrypt.compare(password, user.password);
 
-                const userExist = await User.findOne({
-                    email: profile.email
-                })
+          if (!_passwordsMatch) {
+            return null;
+          }
 
-                if (!userExist) {
-                    let _username = profile.name.trim()
-                    _username = _username.replace(/\s+/g, "")
-                    _username = _username.toLowerCase()
-                    console.log("Current username: ",_username);
-                    await User.create({
-                        email: profile.email,
-                        username: _username,
-                        image: profile.picture
-                    })
-                }
-
-                return true
-            } catch (error) {
-                console.log(error);
-                return false
-            }
+          return user
+          
+        } catch (error) {
+            console.log("Error: ", error);
         }
-    }
+      },
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/auth/signin",
+    signOut: { callbackUrl: 'http://localhost:3000/' },
+  },
+};
 
-})
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
