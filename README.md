@@ -1,4 +1,4 @@
-<center><img src="./public/assets/logo.svg" alt="SCOPE-IT Logo" width="100" height="100"></center>
+<center><img src="./src/assets/logo.svg" alt="SCOPE-IT Logo" width="100" height="100"></center>
 
 # SCOPE-IT
 [![License](https://img.shields.io/badge/license-EULA-blue.svg)](LICENSE)
