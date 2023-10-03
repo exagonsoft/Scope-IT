@@ -1,21 +1,36 @@
 import { lazy } from "react";
 
 // Lazy load the components
+const Layout = lazy(() => import("../containers/layout/layoutContainer"))
 const LandingPage = lazy(() => import("../pages/landing/landingPage"));
-const Dashboard = lazy(() => import("../pages/dashboard/"));
-const Galery = lazy(() => import("../pages/gallery/Galery"));
-const Trainers = lazy(() => import("../pages/trainers/Trainers"));
-const Plans = lazy(() => import("../pages/plans/Plans"));
-const Contacts = lazy(() => import("../pages/contacts/Contacts"));
+const Dashboard = lazy(() => import("../pages/dashboard/dashboardPage"));
+const Estimations = lazy(() => import("../pages/estimations/estimationsPage"));
+const Features = lazy(() => import("../pages/features/featuresPage"));
+const Profile = lazy(() => import("../pages/profile/profilePage"));
+const Projects = lazy(() => import("../pages/projects/projectsPage"));
+const Settings = lazy(() => import("../pages/settings/settingsPage"));
+const SignIn = lazy(() => import("../pages/auth/signinPage"));
+const SignUp = lazy(() => import("../pages/auth/signupPage"));
 const ErrorPage = lazy(() => import("../pages/error/errorPage"));
 
 
+export const layoutRoute = { path: "/", element: <Layout /> }
+
 export const routes = [
     { path: "/landing", element: <LandingPage /> },
-    { path: "/about", element: <About /> },
-    { path: "/contact", element: <Contacts /> },
-    { path: "/gallery", element: <Galery /> },
-    { path: "/plans", element: <Plans /> },
-    { path: "/trainers", element: <Trainers /> },
     { path: "*", element: <ErrorPage /> },
 ];
+
+export const authRoutes = [
+    { path: "/auth/signin", element: <SignIn /> },
+    { path: "/auth/signup", element: <SignUp /> },
+]
+
+export const siteRoutes = [
+    { path: "/dashboard", element: <Dashboard /> },
+    { path: "/estimations", element: <Estimations /> },
+    { path: "/features", element: <Features /> },
+    { path: "/profile", element: <Profile /> },
+    { path: "/projects", element: <Projects /> },
+    { path: "/settings", element: <Settings /> },
+]
