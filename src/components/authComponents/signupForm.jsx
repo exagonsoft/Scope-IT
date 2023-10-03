@@ -42,7 +42,7 @@ const SignUpForm = () => {
       if (_res.ok) {
         let _form = e.target;
         _form.reset();
-        redirect("/auth/signin");
+        redirect("/info/auth/signin");
       }
     } catch (error) {
       setError(error.message);
@@ -102,7 +102,7 @@ const SignUpForm = () => {
         </div>
         <div className="flex items-center justify-end">
           <Link
-            to="/auth/signin"
+            to="/info/auth/signin"
             className="dark:text-black  text-white text-right"
           >
             Already have an Account? LogIn
@@ -111,7 +111,7 @@ const SignUpForm = () => {
       </div>
       <div className="">
         <Link
-            to="/landing"
+            to="/info/landing"
             className="normal_btn"
           >
             Cancel

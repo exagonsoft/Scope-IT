@@ -1,12 +1,21 @@
-import React from 'react'
-import './layoutstyles.css'
+import React, { useContext, useEffect } from "react";
+import "./layoutstyles.css";
+import { Context } from "../../contexts/mainContext";
+import { redirect, useNavigate } from "react-router-dom";
 
 const LayoutContainer = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const { user } = useContext(Context);
+  const navigate = useNavigate()
 
-export default LayoutContainer
+  useEffect(() => {
+    // Redirect to auth/signin if user is null
+    if (!user) {
+      navigate("/info/landing");
+    }
+  }, [user]);
+  return <div>
+
+  </div>;
+};
+
+export default LayoutContainer;

@@ -1,9 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Suspense } from "react";
+import { BrowserRouter, Route, Routes, redirect } from "react-router-dom";
+import { Suspense, useContext } from "react";
 import Loading from "./UI/loadingScreen";
 import { authRoutes, layoutRoute, routes, siteRoutes } from "./routes/routes";
+import { Context } from "./contexts/mainContext";
 
 function App() {
+  const {user} = useContext(Context)
+
   return (
     <div className="App flex">
       <div className="main">

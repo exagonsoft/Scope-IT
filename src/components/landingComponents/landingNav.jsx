@@ -9,7 +9,7 @@ const LandingNav = () => {
                 <img src={Logo} alt="Scope-IT Logo" width={50} height={50} className="object-contain" />
                 <p className="logo_text dark:text-white text-gray-950">Scope-IT</p>
             </Link>
-            <Link to='/auth/signin' className='black_btn'>Sign In</Link>
+            <Link to='/info/auth/signin' className='black_btn'>Sign In</Link>
         </nav>
   )
 }

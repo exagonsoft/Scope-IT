@@ -75,7 +75,7 @@ const SignInForm = () => {
         </div>
         <div className="flex items-center justify-end">
           <Link
-            to="/auth/signup"
+            to="/info/auth/signup"
             className="dark:text-black  text-white text-right"
           >
             Don't have an Account? Register
@@ -84,7 +84,7 @@ const SignInForm = () => {
       </div>
       <div className="">
         <Link
-            to="/landing"
+            to="/info/landing"
             className="normal_btn"
           >
             Cancel

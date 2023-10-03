@@ -2,6 +2,7 @@ import { lazy } from "react";
 
 // Lazy load the components
 const Layout = lazy(() => import("../containers/layout/layoutContainer"))
+const SimpleLayout = lazy(() => import("../containers/layout/layoutContainer"))
 const LandingPage = lazy(() => import("../pages/landing/landingPage"));
 const Dashboard = lazy(() => import("../pages/dashboard/dashboardPage"));
 const Estimations = lazy(() => import("../pages/estimations/estimationsPage"));
@@ -15,15 +16,16 @@ const ErrorPage = lazy(() => import("../pages/error/errorPage"));
 
 
 export const layoutRoute = { path: "/", element: <Layout /> }
+export const guestRoute = { path: "/info", element: <Layout /> }
 
 export const routes = [
-    { path: "/landing", element: <LandingPage /> },
     { path: "*", element: <ErrorPage /> },
 ];
 
 export const authRoutes = [
-    { path: "/auth/signin", element: <SignIn /> },
-    { path: "/auth/signup", element: <SignUp /> },
+    { path: "/info/landing", element: <LandingPage /> },
+    { path: "/info/auth/signin", element: <SignIn /> },
+    { path: "/info/auth/signup", element: <SignUp /> },
 ]
 
 export const siteRoutes = [
