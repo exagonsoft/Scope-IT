@@ -1,7 +1,7 @@
 import React from 'react'
 import './errorstyles.css'
 import Robot from '../../assets/images/questionrobot.png'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const ErrorPage = () => {
   const naviGate =  useNavigate()

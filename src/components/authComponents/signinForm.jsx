@@ -1,14 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { config } from "../../config/config";
+import  CustomCrypto  from "crypticus";
+import { Context } from "../../contexts/mainContext";
 
 const SignInForm = () => {
+  const navigate = useNavigate()
+  const customCrypto = new CustomCrypto(config.SECRET)
   const userCredentialsStruct = {
     email: "",
     password: "",
   };
   const [userData, setUserData] = useState(userCredentialsStruct);
   const [error, setError] = useState("");
+  const { login } = useContext(Context)
 
   const updateUserData = (value, target) => {
     setUserData((prevUserData) => ({ ...prevUserData, [target]: value }));
@@ -18,19 +24,19 @@ const SignInForm = () => {
     e.preventDefault();
 
     try {
-      let email = userData.email;
-      let password = userData.password;
-      const _res = await axios.get("api/signin", userData)
-
-      if (_res.error) {
+      let _encodedPassword = customCrypto.encrypt(userData.password)
+      userData.password = _encodedPassword
+      const _res = await axios.post(config.API_URL + "auth/signin", userData)
+      console.log(_res.data.token);
+      if (_res.status == 403) {
         setError("Invalid Credentials");
         setTimeout(() => {
           setError("");
         }, 2000);
         return
       }
-
-      redirect("/")
+      login(_res.data.token)
+      navigate("/dashboard")
       
     } catch (error) {
       console.log(error);

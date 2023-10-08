@@ -9,6 +9,7 @@ const Estimations = lazy(() => import("../pages/estimations/estimationsPage"));
 const Features = lazy(() => import("../pages/features/featuresPage"));
 const Profile = lazy(() => import("../pages/profile/profilePage"));
 const Projects = lazy(() => import("../pages/projects/projectsPage"));
+const Statistics = lazy(() => import("../pages/statistics/statistics"))
 const Settings = lazy(() => import("../pages/settings/settingsPage"));
 const SignIn = lazy(() => import("../pages/auth/signinPage"));
 const SignUp = lazy(() => import("../pages/auth/signupPage"));
@@ -34,5 +35,6 @@ export const siteRoutes = [
     { path: "/features", element: <Features /> },
     { path: "/profile", element: <Profile /> },
     { path: "/projects", element: <Projects /> },
+    { path: "/statistics", element: <Statistics /> },
     { path: "/settings", element: <Settings /> },
 ]

@@ -1,6 +1,7 @@
 import React from "react";
 import LandingNav from "../../components/landingComponents/landingNav";
 import LandingHero from "../../components/landingComponents/landingHero";
+import TestingComponent from "../../components/landingComponents/testingComponent";
 
 const LandingPage = () => {
   return (
