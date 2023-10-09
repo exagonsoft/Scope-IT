@@ -1,4 +1,4 @@
-<center><img src="./public/assets/logo.svg" alt="SCOPE-IT Logo" width="100" height="100"></center>
+<center><img src="./src/assets/logo.svg" alt="SCOPE-IT Logo" width="100" height="100"></center>
 
 # SCOPE-IT
 [![License](https://img.shields.io/badge/license-EULA-blue.svg)](LICENSE)
@@ -49,7 +49,7 @@ livecodeserver
 
 ### Configuration
 
-To configure SCOPE-IT for your needs, you can edit the `config.js` file located in the `src` directory. In this file, you can change the [default settings](poe://www.poe.com/_api/key_phrase?phrase=default%20settings&prompt=Tell%20me%20more%20about%20default%20settings.) such as the name of your company, the logo, and the colors of the application.
+To configure SCOPE-IT for your needs, you can edit the `config.js` file located in the `src` directory. In this file, you can change the default settings such as the name of your company, the logo, and the colors of the application.
 
 ## Contributing
 
@@ -63,12 +63,14 @@ If you would like to contribute to SCOPE-IT, please follow these steps:
 
 ## License
 
-SCOPE-IT is licensed under the [MIT License]. See `LICENSE` for more information.
+SCOPE-IT is licensed under the [EULA License]('./license'). See `LICENSE` for more information.
 
 ## Contact
 
-If you have any questions or feedback, please contact us at [your-email-address].
+If you have any questions or feedback, please contact us at [melkor@aleph.engineering](mailto:recipient@example.com?subject=Inquiry%20About%20SCOPE-IT&body=Hello%20SCOPE-IT%20Team,%0D%0A%0D%0AI%20have%20a%20question%20about%20your%20software.%20Can%20you%20please%20provide%20more%20information?").
 
-<img src="facebook-icon.png" alt="Facebook" width="30"/>
-<img src="twitter-icon.png" alt="Twitter" width="30"/>
-<img src="linkedin-icon.png" alt="LinkedIn" width="30"/>
+<br />
+
+- [<img src="./public/assets/images/facebook.png" alt="Facebook" width="30"/> Alvaro R. Martin]()
+- [<img src="./public/assets/images/twitter.png" alt="Twitter" width="30"/> @exagonsoft-SL]()
+- [<img src="./public/assets/images/linkedin.png" alt="LinkedIn" width="30"/> Alvaro R Martin]()
