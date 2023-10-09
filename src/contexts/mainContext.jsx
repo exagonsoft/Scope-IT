@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Decode } from "shieldbearer";
+import { config } from "../config/config";
 export const Context = createContext(null);
 
 const langList = {
@@ -20,8 +22,9 @@ export const MainContext = ({ children }) => {
   };
 
   const login = (userData) => {
+    let _userObject = Decode(userData, config.SECRET)
+    console.log("User Object: ", _userObject);
     setCookies("userData", userData, { path: "*", SameSite: "None" });
-    //sessionStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
     setIsLoggedIn(true);
     setTimeout(() => {

@@ -1,0 +1,20 @@
+.custom-button {
+    background: var(--color-primary);
+    border-radius: var(--components-border-radius);
+    cursor: pointer;
+    transition: var(--transitions);
+}
+
+.custom-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadows);
+    background: #1b88f5;
+}
+
+@media (prefers-color-scheme: dark){
+    .custom-button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadows-light);
+        background: #1b88f5;
+    }
+}

@@ -58,7 +58,7 @@ const LayoutContainer = () => {
     <>
       {user ? (
         <>
-          <div className="sm:w-[10%] w-0">
+          <div className="sm:w-[100px] w-0 min-w-[100px]">
             <SideBar
               isWideScreen={isWideScreen}
               presentNav={presentNav}

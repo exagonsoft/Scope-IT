@@ -22,12 +22,14 @@ body {
   --color-gray-600: hsl(var(--gray-hue), 48%, 15%);
   --color-gradient-primary: linear-gradient(45deg, rgb(177, 203, 238), rgb(64, 165, 233), rgb(27, 220, 238));
   --color-gradient-danger: linear-gradient(45deg, rgb(236, 115, 115), rgb(197, 41, 41), rgb(245, 7, 7));
+  --color-gradient-save: linear-gradient(45deg, rgb(115, 236, 125), rgb(54, 197, 41), rgb(7, 245, 7));
 
   --container-width-lg: 80%;
   --container-width-md: 90%;
 
-  --transitions: all 500ms ease;
+  --transitions: all 500ms ease-in-out;
   --shadows: 2px 5px 8px rgba(20, 20, 20, 0.75);
+  --shadows-light: 2px 5px 8px rgba(0, 0, 0, 0.555);
   --glow: 0 0 14px 2px rgb(237 230 52 / 71%);
 
   --fadeInTop1: fadeInTop 1s ease;
@@ -36,6 +38,8 @@ body {
 
   --tw-shadow: 0 10px 15px -3px rgba(85, 81, 81, 0.1), 0 4px 6px -4px rgba(63, 60, 60, 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+
+  --components-border-radius: 5px;
 }
 
 .main {
@@ -122,7 +126,7 @@ body {
   filter: blur(0.3px);
   box-shadow: 5px 5px 15px rgba(0,0,0,.25), 2px 2px 14px rgba(0,0,0,.25), inset 1px 1px 2px rgba(0,0,0,.5), inset 1px 1px 4px rgba(255, 255, 255, .2), inset -1px -1px 3px rgba(0,0,0,.75);
   transition: all ease-in-out .5s;
-  position: absolute;
+  position: fixed;
   right: 1.5rem;
   padding: .5rem 2rem;
   border-radius: 0 0 10px 10px;
@@ -159,9 +163,15 @@ body {
 .containner{
  overflow-y: auto;
  overflow-x: hidden;
- padding: 0 3.5rem;
+ padding: 0 .7rem;
  margin-left: 0;
- width: 95%;
+ width: 100%;
+}
+
+.containner > div:first-child{
+  width: 100% !important;
+  padding-top: 1rem;
+  margin-right: 1.5rem;
 }
 
 @media screen and (max-width: 640px) {
@@ -172,6 +182,18 @@ body {
 }
 
 /* Hide the scrollbar for all div elements */
+body::-webkit-scrollbar {
+  width: 0; /* Set a width for the invisible scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Hide the thumb */
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent; /* Hide the track */
+}
+
 .containner::-webkit-scrollbar {
   width: 0; /* Set a width for the invisible scrollbar */
 }
@@ -190,7 +212,7 @@ body {
   inset 1px 1px 2px rgba(0,0,0,.5),
   inset 1px 1px 4px rgba(255, 255, 255, .2),
   inset -1px -1px 3px rgba(0,0,0,.75);
-  width: 5%;
+  width: 100px;
   min-width: 100px;
 }
 
@@ -455,6 +477,12 @@ background: rgb(76, 214, 238);
       color: black;
       box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
     }
+
+    .green-button:hover{
+      background: var(--color-gradient-save);
+      color: black;
+      box-shadow: var(--tw-ring-offset-shadow, 0 0 #534f4f00), var(--tw-ring-shadow, 0 0 #4d474700), var(--tw-shadow);
+    }
     
     .outline_btn:hover {
       background: var(--color-gradient-danger);
@@ -468,6 +496,7 @@ background: rgb(76, 214, 238);
 .general-container {
   @apply flex flex-col gap-8 p-8 bg-black/50 rounded-lg shadow-xl
 }
+
 
 input {
   @apply sm:min-w-[400px] min-w-[150px] w-full border border-gray-200 py-2 px-6 bg-zinc-900/40  text-white dark:bg-zinc-100/40 dark:text-zinc-900 rounded-md;
@@ -489,6 +518,14 @@ button {
   @apply rounded-full py-1.5 px-5 text-center text-sm font-inter flex items-center justify-center;
 }
 
+.green-button{
+  transition: all ease-in-out .5s;
+  border: none;
+  background: var(--color-gradient-primary);
+  color: black;
+  @apply rounded-full py-1.5 px-5 text-center text-sm font-inter flex items-center justify-center;
+}
+
 .outline_btn {
   transition: all ease-in-out .5s;
   border: none;
@@ -499,6 +536,15 @@ button {
 
 .black_btn:hover {
   background: var(--color-gradient-danger);
+  color:white;
+  transform: scale(1.1);
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.green-button:hover{
+  background: var(--color-gradient-save);
   color:white;
   transform: scale(1.1);
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);

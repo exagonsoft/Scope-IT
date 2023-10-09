@@ -1,10 +1,11 @@
 import React from 'react'
 import './projectstyles.css'
+import ProjectComponentBoard from '../../components/projectComponents/projectComponentsList'
 
 const ProjectsPage = () => {
   return (
-    <div>
-      Projects
+    <div classname="flex w-full justify-center items-center h-full px-4" >
+      <ProjectComponentBoard />
     </div>
   )
 }
