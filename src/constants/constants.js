@@ -28,3 +28,8 @@ export const sideBarLinks = [
         link: '/settings'
     }
 ]
+
+export const mediaFileType = {
+    VIDEO: 'video',
+    PICTURE: 'picture'
+}

@@ -39,7 +39,7 @@ const TestingComponent = () => {
         <div className="flex flex-col w-full">
           <input
             type="text"
-            className=""
+            
             placeholder="Password to Encode"
             onChange={(e) => {
               setPassword(e.target.value);
@@ -47,7 +47,7 @@ const TestingComponent = () => {
           />
           <input
             type="text"
-            className=""
+            
             placeholder="Password to Compare"
             onChange={(e) => {
               setComparePassword(e.target.value);
@@ -55,13 +55,13 @@ const TestingComponent = () => {
           />
         </div>
         <div className="flex justify-between w-full">
-          <button className="" onClick={encode}>
+          <button  onClick={encode}>
             Encode
           </button>
-          <button className="" onClick={decode}>
+          <button  onClick={decode}>
             Decode
           </button>
-          <button className="" onClick={compare}>
+          <button  onClick={compare}>
             Compare
           </button>
         </div>

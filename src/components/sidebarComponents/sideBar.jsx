@@ -14,7 +14,6 @@ const navigate = useNavigate();
 const [toggleMenu, setToggleMenu] = useState(false);
 
 const activateItem = (target) => {
-  console.log("Item Clicked: " + target);
   setIsActive(target);
 };
 
@@ -40,8 +39,8 @@ const navigateTo = (route) => {
                 <img
                   onClick={() => activateItem("none")}
                   src={
-                    user?.image
-                      ? user?.image
+                    user?.picture
+                      ? user?.picture
                       : Profile
                   }
                   alt="profile"
@@ -180,7 +179,7 @@ const navigateTo = (route) => {
             />
             <p className="logo_text">Scope-IT</p>
           </div>
-          <div className="">
+          <div >
             <ul className="side-nav flex flex-col gap-6 pt-6">
               {sideBarLinks.map((_link, index) => (
                 <li

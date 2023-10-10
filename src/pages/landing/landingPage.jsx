@@ -12,7 +12,8 @@ const LandingPage = () => {
   useEffect(() => {
     // Redirect to auth/signin if user is null
     if (user) {
-      navigate(-1);
+      console.log(user);
+      navigate('/dashboard');
     }
   }, [user]);
 

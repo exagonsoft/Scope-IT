@@ -18,7 +18,7 @@ const LandingHero = () => {
             delight your clients.
           </p>
         </div>
-        <div className="">
+        <div >
           <img
             src={HeroImage}
             alt="hero image"

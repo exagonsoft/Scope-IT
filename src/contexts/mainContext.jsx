@@ -23,8 +23,7 @@ export const MainContext = ({ children }) => {
 
   const login = (userData) => {
     let _userObject = Decode(userData, config.SECRET)
-    console.log("User Object: ", _userObject);
-    setCookies("userData", userData, { path: "*", SameSite: "None" });
+    setCookies("userData", _userObject, { path: "*", SameSite: "None" });
     setUser(userData);
     setIsLoggedIn(true);
     setTimeout(() => {

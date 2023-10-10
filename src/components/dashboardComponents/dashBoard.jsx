@@ -18,7 +18,7 @@ const DashBoardComponent = () => {
       <div className="flex flex-col sm:w-[65%] w-full justify-start gap-4">
         <div className="general-container w-full">
           <div className="flex justify-between w-full items-center">
-            <span className="flex uppercase">Dashboard</span>
+            <span className="flex uppercase font-bold">Dashboard</span>
             <div className="dash-select">
               <select>
                 <option value="day">1 Day</option>
@@ -59,18 +59,18 @@ const DashBoardComponent = () => {
           <div className="flex flex-col gap-2 w-full">
             <span className=" uppercase text-bold">Statistics Overview</span>
             <div className="dash-chart-header-box">
-              <div className="">
+              <div >
                 <span className="dash-chart-new ">New Projects</span>
               </div>
-              <div className="">
+              <div >
                 <span className="dash-chart-progress">
                   Estimation In Progress
                 </span>
               </div>
-              <div className="">
+              <div >
                 <span className="dash-chart-review">Under Client Review</span>
               </div>
-              <div className="">
+              <div >
                 <span className="dash-chart-won">Won Overall</span>
               </div>
             </div>
@@ -83,7 +83,7 @@ const DashBoardComponent = () => {
         <div className="flex flex-col gap-8 w-full">
           <div className="flex justify-center items-center gap-2 text-bold uppercase">
             <AiOutlineUsergroupAdd className=" " />
-            <span className="">Developers Overview</span>
+            <span >Developers Overview</span>
           </div>
           <div className="dash-chart-header-box !flex-col !justify-center !items-center !gap-2">
             <span className=" text-gray-400">Developers Involve</span>
@@ -92,29 +92,29 @@ const DashBoardComponent = () => {
           <div className="flex flex-col gap-3 justify-center items-center w-full">
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">Total Visits</span>
-              <span className="">456</span>
+              <span >456</span>
             </div>
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">Media per Project</span>
-              <span className="">2</span>
+              <span >2</span>
             </div>
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">Maximum per Project</span>
-              <span className="">5</span>
+              <span >5</span>
             </div>
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">Minimum per Project</span>
-              <span className="">1</span>
+              <span >1</span>
             </div>
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">Media Response Time (Days)</span>
-              <span className="">3</span>
+              <span >3</span>
             </div>
             <div className="flex justify-between items-center w-full dash-dev-item-effect">
               <span className=" text-gray-400">
                 Faster Response Time (Hours)
               </span>
-              <span className="">6</span>
+              <span >6</span>
             </div>
           </div>
           <div className="flex flex-col w-full gap-1">

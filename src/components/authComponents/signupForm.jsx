@@ -3,17 +3,19 @@ import React, { useState } from "react";
 import { Link, redirect, Navigate, useNavigate } from "react-router-dom";
 import PictureUploader from "../PictureUploader";
 import { config } from "../../config/config";
-import  CustomCrypto  from "crypticus";
+import CustomCrypto from "crypticus";
+import { Decode } from "shieldbearer";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const customCrypto = new CustomCrypto(config.SECRET)
+  const customCrypto = new CustomCrypto(config.SECRET);
   const userDataStruct = {
     name: "",
     lastname: "",
     email: "",
     password: "",
     picture: "",
+    image: "",
   };
   const [userData, setUserData] = useState(userDataStruct);
   const [error, setError] = useState("");
@@ -22,11 +24,31 @@ const SignUpForm = () => {
     setUserData((prevUserData) => ({
       ...prevUserData,
       picture: _newImage.url,
+      image: _newImage.image,
     }));
   };
 
   const updateUserData = (value, target) => {
     setUserData((prevUserData) => ({ ...prevUserData, [target]: value }));
+  };
+
+  const uploadImage = async (id, name) => {
+    try {
+      const _formData = new FormData();
+      _formData.append("file", userData.image);
+      _formData.append("id", id);
+      let _res = await axios.post(config.API_URL + "auth/signup/upload", {
+        image: userData.image,
+        id: id,
+        filename: `${name}.png`,
+      });
+    } catch (error) {
+      console.log(error);
+      setError("Error uploading Picture");
+      setTimeout(() => {
+        setError("");
+      }, 2000);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,11 +70,21 @@ const SignUpForm = () => {
 
       //Create the new User
       let _hash_password = customCrypto.encrypt(userData.password);
-      console.log(_hash_password);
-      userData.password = _hash_password;
-      let _res = await axios.post(config.API_URL + "auth/signup", userData);
-      console.log(_res.data);
+      let _userData = {
+        name: userData.name,
+        lastname: userData.lastname,
+        email: userData.email,
+        password: _hash_password,
+        picture: userData.picture,
+      };
+      let _res = await axios.post(config.API_URL + "auth/signup", _userData);
+
       if (_res.data) {
+        let _decodedToken = Decode(_res.data.token, config.SECRET);
+        if (userData.image) {
+          await uploadImage(_decodedToken.id, _decodedToken.name);
+        }
+
         let _form = e.target;
         _form.reset();
         navigate("/info/auth/signin");
@@ -79,28 +111,24 @@ const SignUpForm = () => {
             onChange={(e) => updateUserData(e.target.value, "name")}
             type="name"
             placeholder="Name"
-            className=""
             required
           />
           <input
             onChange={(e) => updateUserData(e.target.value, "lastname")}
             type="name"
             placeholder="Last Name"
-            className=""
             required
           />
           <input
             onChange={(e) => updateUserData(e.target.value, "email")}
             type="email"
             placeholder="Email"
-            className=""
             required
           />
           <input
             onChange={(e) => updateUserData(e.target.value, "password")}
             type="password"
             placeholder="Password"
-            className=""
             required
           />
           <PictureUploader
@@ -127,7 +155,7 @@ const SignUpForm = () => {
               </Link>
             </div>
           </div>
-          <div className="">
+          <div>
             <Link to="/info/landing" className="normal_btn">
               Cancel
             </Link>

@@ -10,7 +10,7 @@ const DashboardCard = (props) => {
         <span className="dash-card-title">{title}</span>
         <span className="dash-card-icon">{icon}</span>
       </div>
-      <div className="dash-card-value h-[4rem] flex justify-center items-center"><span className="">{value}</span></div>
+      <div className="dash-card-value h-[4rem] flex justify-center items-center"><span >{value}</span></div>
       <div className="flex flex-col">
         <hr className="dash-card-line" />
       </div>

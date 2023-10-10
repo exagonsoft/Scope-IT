@@ -27,7 +27,6 @@ const SignInForm = () => {
       let _encodedPassword = customCrypto.encrypt(userData.password)
       userData.password = _encodedPassword
       const _res = await axios.post(config.API_URL + "auth/signin", userData)
-      console.log(_res.data.token);
       if (_res.status == 403) {
         setError("Invalid Credentials");
         setTimeout(() => {
@@ -58,14 +57,14 @@ const SignInForm = () => {
         onChange={(e) => updateUserData(e.target.value, "email")}
         type="email"
         placeholder="Your email..."
-        className=""
+        
         required
       />
       <input
         onChange={(e) => updateUserData(e.target.value, "password")}
         type="password"
         placeholder="Your password..."
-        className=""
+        
         required
       />
       <button className="w-full bg-green-600 font-bold hover:shadow-lg transition-all">
@@ -88,7 +87,7 @@ const SignInForm = () => {
           </Link>
         </div>
       </div>
-      <div className="">
+      <div >
         <Link
             to="/info/landing"
             className="normal_btn"
