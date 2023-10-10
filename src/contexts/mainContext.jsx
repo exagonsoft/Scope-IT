@@ -14,16 +14,18 @@ export const MainContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [cookies, setCookies] = useCookies(["userData"]);
+  const [cookies, setCookies] = useCookies(["userData", "userToken"]);
   const [isActive, setIsActive] = useState("none");
+  const [token, setToken] = useState(null);
 
   const setLanguage = (lang) => {
     setCurrentLang(langList[lang]);
   };
 
   const login = (userData) => {
-    let _userObject = Decode(userData, config.SECRET)
+    let _userObject = Decode(userData, config.SECRET);
     setCookies("userData", _userObject, { path: "*", SameSite: "None" });
+    setCookies("userToken", userData, { path: "*", SameSite: "None" });
     setUser(userData);
     setIsLoggedIn(true);
     setTimeout(() => {
@@ -34,29 +36,36 @@ export const MainContext = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     setIsLoggedIn(false);
     setCookies("userData", null, { path: "*", SameSite: "None" });
+    setCookies("userToken", null, { path: "*", SameSite: "None" });
   };
 
-  const validateUser = () => {
+  const validateUser = async () => {
     // Check if user data is stored in localStorage
     //const storedUser = sessionStorage.getItem('user');
-    const storedUser = cookies.userData;
-    if (!storedUser) {
-      logout();
-      return;
+    if (!user) {
+      const storedUser = await cookies.userData;
+      if (!storedUser) {
+        logout();
+        return;
+      }
+      if (storedUser == "") {
+        logout();
+        return;
+      }
+      if (storedUser == "null") {
+        logout();
+        return;
+      }
+      setIsLoading(true);
+      setUser(storedUser);
+      let _token = await cookies.userToken;
+      setToken(_token);
+      setIsLoggedIn(true);
+      setIsLoading(false);
     }
-    if (storedUser == "") {
-      logout();
-      return;
-    }
-    if (storedUser == "null") {
-      logout();
-      return;
-    }
-    setIsLoading(true);
-    setUser(storedUser);
-    setIsLoggedIn(true);
   };
 
   const activateItem = () => {
@@ -84,7 +93,7 @@ export const MainContext = ({ children }) => {
   useEffect(() => {
     validateUser();
     setIsLoading(false);
-  }, [isLoggedIn]);
+  }, []);
 
   useEffect(() => {
     activateItem();
@@ -104,6 +113,7 @@ export const MainContext = ({ children }) => {
         currentLang,
         setLanguage,
         user,
+        token,
         login,
         logout,
         isLoggedIn,

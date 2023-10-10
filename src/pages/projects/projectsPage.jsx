@@ -4,7 +4,7 @@ import ProjectComponentBoard from '../../components/projectComponents/projectCom
 
 const ProjectsPage = () => {
   return (
-    <div classname="flex w-full justify-center items-center h-full px-4" >
+    <div className="flex w-full justify-center items-center h-full px-4" >
       <ProjectComponentBoard />
     </div>
   )

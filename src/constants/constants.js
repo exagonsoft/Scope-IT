@@ -33,3 +33,13 @@ export const mediaFileType = {
     VIDEO: 'video',
     PICTURE: 'picture'
 }
+
+export const Authorization = (token) => {
+    let _headers = {
+        headers: {
+            'Authorization': token
+        }
+    }
+
+    return _headers;
+}

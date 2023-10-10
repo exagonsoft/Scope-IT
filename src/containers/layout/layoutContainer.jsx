@@ -3,20 +3,16 @@ import "./layoutstyles.css";
 import { Context } from "../../contexts/mainContext";
 import { Outlet, useNavigate } from "react-router-dom";
 import SideBar from "../../components/sidebarComponents/sideBar";
+import { useCookies } from "react-cookie";
 
 const LayoutContainer = () => {
-  const { user } = useContext(Context);
+  const { user, isLoggedIn } = useContext(Context);
   const navigate = useNavigate();
   const [isWideScreen, setIsWideScreen] = useState(false);
   const [presentNav, setPresentNav] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  useEffect(() => {
-    // Redirect to auth/signin if user is null
-    if (!user) {
-      navigate("/info/landing");
-    }
-  }, [user]);
+  useEffect(() => {}, [isLoggedIn]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,10 +55,7 @@ const LayoutContainer = () => {
       {user ? (
         <>
           <div className="sm:w-[100px] w-0 min-w-[100px]">
-            <SideBar
-              isWideScreen={isWideScreen}
-              presentNav={presentNav}
-            />
+            <SideBar isWideScreen={isWideScreen} presentNav={presentNav} />
           </div>
           <div
             ref={scrollContainerRef}
