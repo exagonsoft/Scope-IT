@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PictureUploader from "../PictureUploader";
@@ -40,7 +40,7 @@ const SignUpForm = () => {
       const _formData = new FormData();
       _formData.append("file", userData.image);
       _formData.append("id", id);
-      let _res = await axios.post(config.API_URL + "auth/signup/upload", {
+      let _res = await axios.post("auth/signup/upload", {
         image: userData.image,
         id: id,
         filename: `${name}.png`,
@@ -59,7 +59,7 @@ const SignUpForm = () => {
 
     try {
       //Check whenever the user exist
-      let _resCheck = await axios.get(config.API_URL + "auth/check_duplicate", {
+      let _resCheck = await axios.get("auth/check_duplicate", {
         params: { email: userData.email },
       });
       const user = await _resCheck.data;
@@ -80,7 +80,7 @@ const SignUpForm = () => {
         password: _hash_password,
         picture: userData.picture,
       };
-      let _res = await axios.post(config.API_URL + "auth/signup", _userData);
+      let _res = await axios.post("auth/signup", _userData);
 
       if (_res.data) {
         let _decodedToken = Decode(_res.data.token, config.SECRET);

@@ -3,7 +3,7 @@ import "./projectcomponenrtstyles.css";
 import CustomButton from "../../UI/customButton/customButton";
 //import Board, { moveCard, moveColumn, removeCard, addCard } from "@asseinfo/react-kanban";
 import { FaPlusCircle } from "react-icons/fa";
-import axios from "axios";
+import axios from "../../api/axios";
 import { config } from "../../config/config";
 import { Authorization } from "../../constants/constants";
 import useAuth from "../../hooks/useAuth";
@@ -16,8 +16,7 @@ const ProjectComponentBoard = () => {
   const loadProjects = async () => {
     let _headers = Authorization(token)
     try {
-      let _res = await axios.get(
-        config.API_URL + "projects/list_projects",
+      let _res = await axios.get("projects/list_projects",
         _headers
       );
       setProjectsList(_res.data);

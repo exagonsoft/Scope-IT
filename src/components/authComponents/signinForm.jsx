@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { config } from "../../config/config";
@@ -28,7 +28,7 @@ const SignInForm = () => {
     try {
       let _encodedPassword = customCrypto.encrypt(userData.password);
       userData.password = _encodedPassword;
-      const _res = await axios.post(config.API_URL + "auth/signin", userData);
+      const _res = await axios.post("auth/signin", userData);
       if (!_res.data.id) {
         setError("Invalid Credentials");
         setTimeout(() => {
