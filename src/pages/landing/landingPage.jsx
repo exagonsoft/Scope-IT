@@ -1,22 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import LandingNav from "../../components/landingComponents/landingNav";
 import LandingHero from "../../components/landingComponents/landingHero";
 import TestingComponent from "../../components/landingComponents/testingComponent";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../../contexts/mainContext";
-import { useCookies } from "react-cookie";
+import useAuth from "../../hooks/useAuth";
 
 const LandingPage = () => {
-  const { user } = useContext(Context)
+  const { user } = useAuth();
   const navigate = useNavigate()
-  const [cookies, setCookies] = useCookies(["userData"]);
+  
 
   useEffect(() => {
     // Redirect to auth/signin if user is null
-    const storedUser = cookies.userData;
-    if (storedUser) {
-      navigate('/dashboard');
-    }
+    // const storedUser = cookies.userData;
+    // if (storedUser) {
+    //   navigate('/dashboard');
+    // }
   }, []);
 
   return (

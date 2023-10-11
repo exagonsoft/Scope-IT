@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-import { Decode } from "shieldbearer";
+import { Decode, Validate } from "shieldbearer";
 import { config } from "../config/config";
 export const Context = createContext(null);
 
@@ -11,60 +10,32 @@ const langList = {
 
 export const MainContext = ({ children }) => {
   const [currentLang, setCurrentLang] = useState("English");
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [cookies, setCookies] = useCookies(["userData", "userToken"]);
+  const [user, setUser] = useState({});
   const [isActive, setIsActive] = useState("none");
-  const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] =  useState(false)
 
   const setLanguage = (lang) => {
     setCurrentLang(langList[lang]);
   };
 
   const login = (userData) => {
-    let _userObject = Decode(userData, config.SECRET);
-    setCookies("userData", _userObject, { path: "*", SameSite: "None" });
-    setCookies("userToken", userData, { path: "*", SameSite: "None" });
     setUser(userData);
-    setIsLoggedIn(true);
-    setTimeout(() => {
-      setIsLoading(true);
-      setIsLoading(false);
-    }, 3000);
   };
 
   const logout = () => {
-    setUser(null);
-    setToken(null);
-    setIsLoggedIn(false);
-    setCookies("userData", null, { path: "*", SameSite: "None" });
-    setCookies("userToken", null, { path: "*", SameSite: "None" });
+    setUser({});
   };
 
   const validateUser = async () => {
     // Check if user data is stored in localStorage
     //const storedUser = sessionStorage.getItem('user');
-    if (!user) {
-      const storedUser = await cookies.userData;
-      if (!storedUser) {
+
+    if (user.token) {
+      if(!Validate(user.token, config.SECRET))
+      {
         logout();
         return;
       }
-      if (storedUser == "") {
-        logout();
-        return;
-      }
-      if (storedUser == "null") {
-        logout();
-        return;
-      }
-      setIsLoading(true);
-      setUser(storedUser);
-      let _token = await cookies.userToken;
-      setToken(_token);
-      setIsLoggedIn(true);
-      setIsLoading(false);
     }
   };
 
@@ -92,7 +63,6 @@ export const MainContext = ({ children }) => {
 
   useEffect(() => {
     validateUser();
-    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -113,13 +83,12 @@ export const MainContext = ({ children }) => {
         currentLang,
         setLanguage,
         user,
-        token,
         login,
         logout,
-        isLoggedIn,
-        isLoading,
         isActive,
         setIsActive,
+        isLoading,
+        setIsLoading
       }}
     >
       {children}

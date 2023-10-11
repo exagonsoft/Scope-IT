@@ -171,7 +171,6 @@ body {
 .containner > div:first-child{
   width: 100% !important;
   padding-top: 1rem;
-  margin-right: 1.5rem;
 }
 
 @media screen and (max-width: 640px) {

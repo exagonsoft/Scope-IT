@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./projectcomponenrtstyles.css";
 import CustomButton from "../../UI/customButton/customButton";
 //import Board, { moveCard, moveColumn, removeCard, addCard } from "@asseinfo/react-kanban";
@@ -6,11 +6,12 @@ import { FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
 import { config } from "../../config/config";
 import { Authorization } from "../../constants/constants";
-import { Context } from "../../contexts/mainContext";
+import useAuth from "../../hooks/useAuth";
+
 
 const ProjectComponentBoard = () => {
   const [projectsList, setProjectsList] = useState(null);
-  const { token } = useContext(Context);
+  const { token } = useAuth()
 
   const loadProjects = async () => {
     let _headers = Authorization(token)

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './dashboardstyles.css'
 import DashBoardComponent from '../../components/dashboardComponents/dashBoard'
-import { Context } from '../../contexts/mainContext'
+import useAuth from '../../hooks/useAuth'
 
 const DashBoardPage = () => {
-  const { setIsActive} = useContext(Context)
+  const { setIsActive} = useAuth();
 
   useEffect(() => {
     setIsActive('none');

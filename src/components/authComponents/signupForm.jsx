@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, redirect, Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PictureUploader from "../PictureUploader";
 import { config } from "../../config/config";
 import CustomCrypto from "crypticus";
@@ -18,7 +18,10 @@ const SignUpForm = () => {
     image: "",
   };
   const [userData, setUserData] = useState(userDataStruct);
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const matchPassRef = useRef();
   const [error, setError] = useState("");
+  const [formValid, setFormValid] = useState(true)
 
   const onImageSelected = async (_newImage) => {
     setUserData((prevUserData) => ({
@@ -97,6 +100,24 @@ const SignUpForm = () => {
       }, 2000);
     }
   };
+
+  useEffect(() => {
+    const _match = passwordCheck == userData.password;
+    if(!_match){
+      if(matchPassRef.current){
+        setFormValid((prevFormValid) => !prevFormValid)
+        matchPassRef.current.style.border = "solid 1px red"
+        matchPassRef.current.style.outlineColor = "red"
+      }
+    }else{
+      if(matchPassRef.current){
+        setFormValid(true)
+        matchPassRef.current.style.border = ""
+        matchPassRef.current.style.outlineColor = ""
+      }
+    }
+  }, [passwordCheck]);
+
   return (
     <div className="flex flex-col">
       <div
@@ -131,11 +152,20 @@ const SignUpForm = () => {
             placeholder="Password"
             required
           />
+          <input
+            ref={matchPassRef}
+            onChange={(e) => {
+              setPasswordCheck(e.target.value);
+            }}
+            type="password"
+            placeholder="Retype Password"
+            required
+          />
           <PictureUploader
             image={userData.picture}
             onChange={onImageSelected}
           />
-          <button className="w-full bg-green-600 font-bold hover:shadow-lg transition-all">
+          <button disabled={!formValid} className="w-full bg-green-600 font-bold hover:shadow-lg transition-all">
             Register
           </button>
           <div className="flex justify-between items-center mt-2">

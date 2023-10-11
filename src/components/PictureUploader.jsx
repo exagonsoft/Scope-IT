@@ -12,6 +12,7 @@ const PictureUploader = (props) => {
   const loadingImageFile = (event) => {
     const element = event.target.files[0];
     if (element) {
+      console.log(element.size);
       if (element.size > 40000) {
         setError("Max File Size 4mb");
         setTimeout(() => {

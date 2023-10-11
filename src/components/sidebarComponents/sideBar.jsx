@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import './sidebarstyles.css'
 import { Context } from '../../contexts/mainContext'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from "../../assets/logo.svg"
 import Profile from "../../assets/images/profile.svg"
 import { sideBarLinks } from '../../constants/constants'
+import useAuth from '../../hooks/useAuth'
 
 
 const SideBar = ({ isWideScreen }) => {
-const {logout, user, isActive, setIsActive} = useContext(Context)
+const {logout, user, isActive, setIsActive} = useAuth()
 const navigate = useNavigate();
 
 const [toggleMenu, setToggleMenu] = useState(false);
